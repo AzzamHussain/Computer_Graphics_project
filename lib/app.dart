@@ -2,7 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 import 'package:recyclegame/constant.dart';
-import 'package:recyclegame/green/go_green_game.dart';
+import 'package:recyclegame/game/go_green_game.dart';
 
 class GameApp extends StatefulWidget {
   const GameApp({super.key});

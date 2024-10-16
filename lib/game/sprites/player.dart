@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:recyclegame/constant.dart';
-import 'package:recyclegame/green/go_green_game.dart';
-
+import 'package:recyclegame/game/go_green_game.dart';
 
 class Player extends SpriteComponent with HasGameRef<GoGreenGame> {
   @override
@@ -12,6 +12,7 @@ class Player extends SpriteComponent with HasGameRef<GoGreenGame> {
     size = Vector2.all(100);
     position = Vector2(0, -(gameHeight / 2) + (size.y / 2));
     anchor = Anchor.center;
+    add(RectangleHitbox());
   }
 
   @override
@@ -25,5 +26,15 @@ class Player extends SpriteComponent with HasGameRef<GoGreenGame> {
     }
 
     position.y = newY;
+  }
+
+  void move(double deltaX) {
+    double newX = position.x + deltaX;
+
+    double minX = -(gameRef.size.x / 2) + size.x / 2; // Left boundary
+    double maxX = (gameRef.size.x / 2) - size.x / 2; // Right boundary
+    newX = newX.clamp(minX, maxX);
+
+    position.x = newX;
   }
 }
